@@ -1,4 +1,6 @@
-//UC11EmployeeWageBuilder  Interface approach array
+//UC12EmployeeWageBuilder Arraylist Approach
+import java.util.ArrayList;
+import java.util.Collections; 
 interface IComputeWage {
 	
 	public void addCompanyEmpWage(String company, int empRatePerHour, int numOfWorkingDays, int maximumHoursPerMonth);
@@ -30,17 +32,16 @@ public class EmpWageBuilder implements IComputeWage {
     	
         public static final int isFullTime = 1;
 	public static final int isPartTime = 2;
-	private int numOfCompany; 
-	private TotalWage[] empWageArray;
+	private ArrayList<TotalWage> empList;
 	
 	public EmpWageBuilder() {
   
-		empWageArray=new TotalWage[5];
+               empList =new ArrayList<>();
 	}
 	public void addCompanyEmpWage( String company, int empRatePerHour, int numOfWorkingDays, int maximumHoursPerMonth) {
 
-		empWageArray[numOfCompany]=new TotalWage( company, empRatePerHour, numOfWorkingDays, maximumHoursPerMonth);
-		numOfCompany++;
+		TotalWage empWage=new TotalWage( company, empRatePerHour, numOfWorkingDays, maximumHoursPerMonth);
+		empList.add(empWage);
 	}
     private int calculate(TotalWage a) {
 		
@@ -68,9 +69,9 @@ public class EmpWageBuilder implements IComputeWage {
    }
 	public void computeEmpWage() {
 		
-		        for(int i=0;i<numOfCompany;i++) {
-			empWageArray[i].setTotalEmpWage(this.calculate(empWageArray[i]));
-			System.out.println(empWageArray[i]);
+		        for(int i=0;i<empList.size();i++) {
+			empList.get(i).setTotalEmpWage(this.calculate(empList.get(i)));
+			System.out.println(empList.get(i));
 		    }
 	}
 	
