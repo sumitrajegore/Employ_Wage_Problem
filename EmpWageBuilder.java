@@ -1,5 +1,9 @@
-
-//Ability to manage emp wage of multiple companies using array
+//UC11EmployeeWageBuilder  Interface approach array
+interface IComputeWage {
+	
+	public void addCompanyEmpWage(String company, int empRatePerHour, int numOfWorkingDays, int maximumHoursPerMonth);
+	public void computeEmpWage();
+        }
 class TotalWage {
 	
 	public final String company;
@@ -22,7 +26,7 @@ class TotalWage {
 		return "\nTotal Employee Wage for " +company+ " is " +totalWage;
 	}
 }
-    public class EmpWageBuilder {
+public class EmpWageBuilder implements IComputeWage {
     	
         public static final int isFullTime = 1;
 	public static final int isPartTime = 2;
@@ -33,7 +37,7 @@ class TotalWage {
   
 		empWageArray=new TotalWage[5];
 	}
-	private void addCompanyEmpWage( String company, int empRatePerHour, int numOfWorkingDays, int maximumHoursPerMonth) {
+	public void addCompanyEmpWage( String company, int empRatePerHour, int numOfWorkingDays, int maximumHoursPerMonth) {
 
 		empWageArray[numOfCompany]=new TotalWage( company, empRatePerHour, numOfWorkingDays, maximumHoursPerMonth);
 		numOfCompany++;
@@ -62,7 +66,7 @@ class TotalWage {
              } 
        return totalEmpHours * a.empRatePerHour;
    }
-	private void computeEmpWage() {
+	public void computeEmpWage() {
 		
 		        for(int i=0;i<numOfCompany;i++) {
 			empWageArray[i].setTotalEmpWage(this.calculate(empWageArray[i]));
@@ -74,6 +78,10 @@ class TotalWage {
 
 		EmpWageBuilder obj = new EmpWageBuilder();
 		obj.addCompanyEmpWage("Amazon", 10, 20, 180);
+		obj.addCompanyEmpWage("Microsoft", 50, 24, 100);
+		obj.addCompanyEmpWage("Flipkart", 20, 26, 130);
+		obj.addCompanyEmpWage("Wipro", 12, 28, 150);
+		obj.addCompanyEmpWage("Accenture", 50, 22, 100);
 		obj.computeEmpWage();
 		}
 }
